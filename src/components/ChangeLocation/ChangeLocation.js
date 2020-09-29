@@ -26,6 +26,8 @@ function ChangeLocation({ currentCity, currentState }) {
       dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
       dispatch(getCurrentWeather(city))
       dispatch(getWeatherForecast(city))
+      setCity('')
+      setState('')
    }
    const handleCityName = (e) => {
       setCity(e.target.value)
@@ -55,7 +57,7 @@ function ChangeLocation({ currentCity, currentState }) {
    return (
       <div className='location'>
          <div className='change-location'>
-            ADD CITY{' '}
+            Add City{' '}
             <TextField
                id='standard-basic'
                label='City'
@@ -64,6 +66,7 @@ function ChangeLocation({ currentCity, currentState }) {
                required
                variant='outlined'
                style={{ width: 350, marginLeft: 10 }}
+               value={city || ''}
             />
             <TextField
                id='standard-basic'
@@ -73,6 +76,7 @@ function ChangeLocation({ currentCity, currentState }) {
                required
                variant='outlined'
                style={{ width: 80, marginLeft: 5 }}
+               value={state||''}
             />
             <Button
                variant='contained'
