@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import WeatherContainers from './containers/WeatherContainer'
 

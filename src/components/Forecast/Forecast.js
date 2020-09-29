@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 
@@ -8,7 +8,7 @@ import './Forecast.scss'
 
 function Forecast() {
    const dispatch = useDispatch()
-   const location = useSelector((store) => store.appReducer.location);
+   const location = useSelector((store) => store.appReducer.location)
    useEffect(() => {
       dispatch(getWeatherForecast(location.city))
    }, [])
@@ -18,21 +18,27 @@ function Forecast() {
    return (
       <div className='forecast'>
          <h4> Forecast for next 3 days </h4>
-         {dates ?
+         {dates ? (
             dates.map((date, i) => {
                const weather = date && date.weather && date.weather[0]
                return (
                   <div key={i} className='forecast-item'>
-                    <h6> {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}</h6>
-                        <img
-                           src={`http://openweathermap.org/img/wn/${
-                              weather && weather.icon
-                           }@4x.png`}
-                        />
+                     <h6>
+                        {' '}
+                        {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}
+                     </h6>
+                     <img
+                        src={`http://openweathermap.org/img/wn/${
+                           weather && weather.icon
+                        }@4x.png`}
+                     />
                      <h6>{weather && weather.description}</h6>
                   </div>
                )
-            }):<div className='forecast-item'></div>}
+            })
+         ) : (
+            <div className='forecast-item'></div>
+         )}
       </div>
    )
 }

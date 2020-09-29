@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { CircularProgress } from '@material-ui/core'
 import moment from 'moment'
@@ -11,6 +11,7 @@ import './CurrentWeather.scss'
 function CurrentWeather() {
    const dispatch = useDispatch()
    const location = useSelector((store) => store.appReducer.location)
+   const locations = useSelector((store) => store.appReducer.locations)
    useEffect(() => {
       dispatch(getCurrentWeather(location.city))
    }, [])
@@ -36,7 +37,9 @@ function CurrentWeather() {
             <div>{weather && weather.description}</div>
          </div>
          <h5>
-            Your current location is{' '}
+            {locations && locations.length === 1
+               ? 'Your default location is '
+               : 'Your current location is '}
             {location && location.city && capitalize(location.city)},{' '}
             {location && location.state.toUpperCase()}
          </h5>
