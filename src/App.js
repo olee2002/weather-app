@@ -7,9 +7,11 @@ import './App.scss'
 
 function App() {
    const dispatch = useDispatch()
-   // useEffect(() => {
-   //    dispatch(getWeatherData('Atlanta'))
-   // }, [])
+   const [currentCity, setCurrentCity] = useState('Atlanta')
+   
+   useEffect(() => {
+      dispatch(getWeatherData(currentCity))
+   }, [])
 
    const data = useSelector((store) => store.appReducer.location)
    console.log('data', data)
@@ -20,13 +22,9 @@ function App() {
             <p>
                Welcome to the weather app
             </p>
-            <a
-               className='App-link'
-               href='https://reactjs.org'
-               target='_blank'
-               rel='noopener noreferrer'>
-               Learn React
-            </a>
+            <h6>
+               Your current location is {currentCity}
+            </h6>
          </header>
       </div>
    )
