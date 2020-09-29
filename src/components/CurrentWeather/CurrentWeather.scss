@@ -1,18 +1,26 @@
-.current-weather {
-   width: 400px;
-   height: 400px;
-   padding: 30px 30px;
-   background: #ffffff;
+.weather-container {
+   top: 200px;
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   box-shadow: 5px 5px 5px #2c2c2c;
-   img{
-      width: 100%;
-   }
-   .temp{
-      font-size: 100px;
-      color: #19461A;
+   margin-right: 20px;
+   .current-weather {
+      width: 400px;
+      height: 400px;
+      padding: 30px 30px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 5px 5px 5px #2c2c2c;
+      img {
+         width: 100%;
+      }
+      .temp {
+         font-size: 100px;
+         color: #19461a;
+      }
    }
 }
