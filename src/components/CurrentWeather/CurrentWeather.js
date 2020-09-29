@@ -32,10 +32,10 @@ function CurrentWeather({ currentCity, currentState }) {
             </div>
             <div>{weather && weather.description}</div>
          </div>
-         <h4>
+         <h5>
             Your current weather location is {currentCity},{currentState} on{' '}
             {date}
-         </h4>
+         </h5>
       </div>
    )
 }
