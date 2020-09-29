@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getWeatherData } from './redux/actionCreator'
+import { getCurrentWeather, getWeatherForecast } from './redux/actionCreator'
+
+import WeatherContainers from './containers/WeatherContainer'
 
 import './App.scss'
 
 function App() {
    const dispatch = useDispatch()
    const [currentCity, setCurrentCity] = useState('Atlanta')
-   
-   useEffect(() => {
-      dispatch(getWeatherData(currentCity))
-   }, [])
+   const [currentState, setCurrentState] = useState('GA')
+   const [cnt, setCurrentCnt] = useState(3)
 
-   const data = useSelector((store) => store.appReducer.location)
+   useEffect(() => {
+     // dispatch(getWeatherForecast(currentCity))
+      dispatch(getCurrentWeather(currentCity))
+   }, [])
 
    return (
       <div className='App'>
-         <header className='App-header'>
-            <p>
-               Welcome to the weather app
-            </p>
-            <h6>
-               Your current location is {currentCity}
-            </h6>
-         </header>
+         <div className='App-header'>
+            <WeatherContainers currentCity={currentCity} currentState={currentState}/>
+         </div>
       </div>
    )
 }

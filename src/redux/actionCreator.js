@@ -1,14 +1,22 @@
 import axios from 'axios'
 
-import { FETCH_DATA } from './actionTypes'
+import { FETCH_FORECAST_DATA, FETCH_CURRENT_DATA } from './actionTypes'
 
 const { REACT_APP_WEATHER_API_HOST, REACT_APP_WEATHER_API_KEY } = process.env
 
 // creating an action creator for an async action and dispatch it to the store (Thunk middleware enables the dispatch)
-export const getWeatherData = (name) => (dispatch) => {
+export const getWeatherForecast = (city) => (dispatch) => {
    axios
-      .get(`${REACT_APP_WEATHER_API_HOST}q=${name}&appid=${REACT_APP_WEATHER_API_KEY}`)
+      .get(`${REACT_APP_WEATHER_API_HOST}forecast?q=${city}&appid=${REACT_APP_WEATHER_API_KEY}`)
       .then((res) => {
-         return dispatch({ type: FETCH_DATA, payload: res.data })})
+         return dispatch({ type: FETCH_FORECAST_DATA, payload: res.data })})
+      .catch((err) => console.log(err.message))
+}
+
+export const getCurrentWeather = (city) => (dispatch) => {
+   axios
+      .get(`${REACT_APP_WEATHER_API_HOST}weather?q=${city}&appid=${REACT_APP_WEATHER_API_KEY}`)
+      .then((res) => {
+         return dispatch({ type: FETCH_CURRENT_DATA, payload: res.data })})
       .catch((err) => console.log(err.message))
 }

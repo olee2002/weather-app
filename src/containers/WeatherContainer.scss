@@ -1,0 +1,18 @@
+.container {
+   width: 100%;
+   height:100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   img{
+      width: 100%;
+   }
+   .temp{
+      font-size: 100px;
+      color: #19461A;
+   }
+   h4{
+      color:#ffffff;
+   }
+}
