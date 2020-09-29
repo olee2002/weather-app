@@ -8,3 +8,10 @@
    justify-content: space-evenly;
    align-items: center;
 }
+
+
+@media (max-width: 700px) {
+   .change-location {
+      width: 90%;
+    }
+}

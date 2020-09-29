@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
-import { getCurrentWeather } from '../../redux/actionCreator'
+import { getCurrentWeather } from '../../redux/actionCreator';
+import { capitalize } from '../../utils';
 
-import './CurrentWeather.scss'
+import './CurrentWeather.scss';
 
 function CurrentWeather({ currentCity, currentState }) {
    const dispatch = useDispatch()
@@ -12,7 +13,8 @@ function CurrentWeather({ currentCity, currentState }) {
       dispatch(getCurrentWeather(currentCity))
    }, [])
    const date = moment(new Date()).format('MM/DD/YY')
-   const data = useSelector((store) => store.appReducer.currentData)
+   const data = useSelector((store) => store.appReducer.currentData);
+   const location = useSelector((store) => store.appReducer.location);
    const weather = data && data.weather && data.weather[0]
    const temp =
       data && data.main && (((data.main.temp - 273.15) * 9) / 5 + 32).toFixed(0)
@@ -33,7 +35,7 @@ function CurrentWeather({ currentCity, currentState }) {
             <div>{weather && weather.description}</div>
          </div>
          <h5>
-            Your current weather location is {currentCity}, {currentState}
+            Your current weather location is {location && location.city && capitalize(location.city)}, {location && location.state.toUpperCase()}
          </h5>
       </div>
    )
