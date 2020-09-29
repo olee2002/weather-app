@@ -25,7 +25,7 @@ export default function appReducer(state = initialState, action) {
       case DELETE_LOCATION:
          state = {
             locations: state.locations.filter(
-               (location) => location.id !== action.payload
+               (location) => location.city !== action.payload
             ),
          }
          return state

@@ -19,7 +19,10 @@ function ChangeLocation({ currentCity, currentState }) {
    const [state, setState] = useState('')
    const [err, setErr] = useState('')
    const submitCityName = () => {
-      dispatch({ type: 'ADD_LOCATION', payload: { city:capitalize(city), state: state.toUpperCase() }})
+      dispatch({
+         type: 'ADD_LOCATION',
+         payload: { city: capitalize(city), state: state.toUpperCase() },
+      })
       dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
       dispatch(getCurrentWeather(city))
       dispatch(getWeatherForecast(city))
@@ -31,15 +34,28 @@ function ChangeLocation({ currentCity, currentState }) {
       setState(e.target.value)
    }
    const updateCity = (location) => {
-      dispatch({ type: 'SET_LOCATION_NAME', payload: { city: location.city, state:location.state } })
+      dispatch({
+         type: 'SET_LOCATION_NAME',
+         payload: { city: location.city, state: location.state },
+      })
       dispatch(getCurrentWeather(location.city))
       dispatch(getWeatherForecast(location.city))
+   }
+   const deleteCity = (location) => {
+      dispatch({
+         type: 'DELETE_LOCATION',
+         payload: location.city,
+      })
+      dispatch({
+         type: 'SET_LOCATION_NAME',
+         payload: { city: locations[0].city, state: locations[0].state },
+      })
    }
 
    return (
       <div className='location'>
          <div className='change-location'>
-            Search{' '}
+            ADD CITY{' '}
             <TextField
                id='standard-basic'
                label='City'
@@ -67,9 +83,17 @@ function ChangeLocation({ currentCity, currentState }) {
                Add
             </Button>
          </div>
+            <h5>Current Selected Location(s)</h5>
          <div className='name-container'>
-            Selected Cities:
-            {locations && locations.map((location) => <div className='name-tag' onClick={()=>updateCity(location)}>{location.city}</div>)}{' '}
+            {locations &&
+               locations.map((location) => (
+                  <div
+                     className='name-tag'
+                     onClick={() => updateCity(location)}>
+                     {location.city}
+                     <button onClick={()=>deleteCity(location)}>X</button>
+                  </div>
+               ))}{' '}
          </div>
       </div>
    )
