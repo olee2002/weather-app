@@ -7,12 +7,13 @@ import './WeatherContainer.scss'
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather'
 import Forecast from '../components/Forecast/Forecast'
 
-function WeatherContainer({ currentCity, currentState }) {
+function WeatherContainer() {
+   const [currentCity, setCurrentCity] = useState('Atlanta')
+   const [currentState, setCurrentState] = useState('GA')
    return (
       <div className='container'>
          <CurrentWeather currentCity={currentCity} currentState={currentState}/>
-         <Forecast currentCity={currentCity}/>
-        
+         <Forecast currentCity={currentCity}/>  
       </div>
    )
 }

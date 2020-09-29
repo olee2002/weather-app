@@ -13,7 +13,7 @@ function Forecast({ currentCity }) {
    }, [])
    const data = useSelector((store) => store.appReducer.forecastData)
    const dates =
-      data && data.list && data.list.slice(0, 19).filter((d, i) => i % 7 === 0) // filter data to get next 3 days
+      data && data.list && data.list.slice(7, 26).filter((d, i) => i % 8 === 0) // filter data to get next 3 days
    console.log('dates', dates)
    return (
       <div className='forecast'>
