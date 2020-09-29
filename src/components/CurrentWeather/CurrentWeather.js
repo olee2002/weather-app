@@ -19,7 +19,7 @@ function CurrentWeather({ currentCity, currentState }) {
    const currentTime = moment(new Date()).format('hh:mm a')
    return (
       <div className='weather-container'>
-         <h4> Current Weather on{' '}{date} </h4>
+         <h4> Current Weather on {date} </h4>
          <div className='current-weather'>
             <div>As of {currentTime} </div>
             <div className='temp'>{temp}°</div>
@@ -33,7 +33,7 @@ function CurrentWeather({ currentCity, currentState }) {
             <div>{weather && weather.description}</div>
          </div>
          <h5>
-            Your current weather location is {currentCity},{currentState} 
+            Your current weather location is {currentCity}, {currentState}
          </h5>
       </div>
    )

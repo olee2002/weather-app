@@ -8,8 +8,8 @@ import CurrentWeather from '../components/CurrentWeather/CurrentWeather'
 import Forecast from '../components/Forecast/Forecast'
 
 function WeatherContainer() {
-   const [currentCity, setCurrentCity] = useState('Atlanta')
-   const [currentState, setCurrentState] = useState('GA')
+   const [currentCity, setCurrentCity] = useState('San antonio')
+   const [currentState, setCurrentState] = useState('NY')
    return (
       <div className='container'>
          <CurrentWeather currentCity={currentCity} currentState={currentState}/>
