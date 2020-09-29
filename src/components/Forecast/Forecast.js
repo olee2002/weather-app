@@ -21,11 +21,14 @@ function Forecast() {
          {dates ? (
             dates.map((date, i) => {
                const weather = date && date.weather && date.weather[0]
+               const temp =
+      date && date.main && (((date.main.temp - 273.15) * 9) / 5 + 32).toFixed(0)
                return (
                   <div key={i} className='forecast-item'>
                      <h6>
+                        {temp}°
                         {' '}
-                        {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}
+                        ({moment(date.dt_txt.split(' ')[0]).format('MM/DD')})
                      </h6>
                      <img
                         src={`http://openweathermap.org/img/wn/${
@@ -37,7 +40,9 @@ function Forecast() {
                )
             })
          ) : (
-            <div className='forecast-item'></div>
+            <div className='forecast-item'>
+               <h6>No forecast data available!</h6>
+            </div>
          )}
       </div>
    )

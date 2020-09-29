@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, MenuItem } from '@material-ui/core'
 
 import {
    getCurrentWeather,
    getWeatherForecast,
 } from '../../redux/actionCreator'
 import { capitalize } from '../../utils'
+import states from './stateList'
 import './ChangeLocation.scss'
 
 function ChangeLocation() {
@@ -23,11 +24,14 @@ function ChangeLocation() {
       window.addEventListener('resize', updateDimensions)
       return () => window.removeEventListener('resize', updateDimensions)
    }, [])
-   const addCityName = async() => {
-     await dispatch(getCurrentWeather(city))
-    
-      if (!errMsg.includes('404')) {
-         console.log('dont run')
+   const addCityName = async () => {
+      await dispatch(getCurrentWeather(city))
+
+      if (errMsg && errMsg.includes('404')) {
+         setCity('')
+         setState('')
+         alert('Invalid city name. Please try again!')
+      } else {
          await dispatch(getWeatherForecast(city))
          await dispatch({
             type: 'ADD_LOCATION',
@@ -36,10 +40,6 @@ function ChangeLocation() {
          await dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
          setCity('')
          setState('')
-      } else {
-         setCity('')
-         setState('')
-         alert('Invalid city name. Please try again!')
       }
    }
    const handleCityName = (e) => {
@@ -79,7 +79,7 @@ function ChangeLocation() {
    return (
       <div className='location'>
          <div className='change-location'>
-            {width > 1000 ? 'Add City' : ''}
+            {width > 1000 ? 'Add Location' : ''}
             <TextField
                id='city'
                label='City'
@@ -87,27 +87,47 @@ function ChangeLocation() {
                onChange={handleCityName}
                required
                variant='outlined'
-               style={{ width: '45%', marginLeft: 10 }}
+               style={{ width: width === 700 ? '35%' : '45%', marginLeft: 10 }}
                value={city || ''}
             />
             <TextField
+               helperText=''
                id='state'
                label='State'
                margin='dense'
                onChange={handleStateName}
                required
+               select
+               style={{ width: 95, marginLeft: 5 }}
                variant='outlined'
-               style={{ width: 70, marginLeft: 5 }}
-               value={state || ''}
-            />
-            <Button
-               variant='contained'
-               color='primary'
-               disabled={!city || !state}
-               onClick={addCityName}
-               style={{ marginLeft: 10 }}>
-               Add
-            </Button>
+               value={state || ''}>
+               {states.map((option) => (
+                  <MenuItem
+                     key={option.abbreviation}
+                     value={option.abbreviation}>
+                     {option.abbreviation}
+                  </MenuItem>
+               ))}
+            </TextField>
+            {width > 700 ? (
+               <Button
+                  variant='contained'
+                  color='primary'
+                  disabled={!city || !state}
+                  onClick={addCityName}
+                  style={{ marginLeft: 10 }}>
+                  Add
+               </Button>
+            ) : (
+               <button
+                  variant='contained'
+                  color='primary'
+                  disabled={!city || !state}
+                  onClick={addCityName}
+                  style={{ marginLeft: 10, height: 30, width: 30 }}>
+                  +
+               </button>
+            )}
          </div>
          <h5>
             {locations && locations.length === 1

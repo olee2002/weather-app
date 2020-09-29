@@ -23,9 +23,14 @@ function CurrentWeather() {
    const currentTime = moment(new Date()).format('hh:mm a')
    return weather ? (
       <div className='weather-container'>
-         <h4> Current Weather on {date} </h4>
+         <h4>
+            {' '}
+            Current weather in{' '}
+            {location && location.city && capitalize(location.city)},{' '}
+            {location && location.state.toUpperCase()}{' '}
+         </h4>
          <div className='current-weather'>
-            <div>As of {currentTime} </div>
+            <div>As of {currentTime}<small>({date})</small> </div>
             <div className='temp'>{temp}°</div>
             <div>
                <img
@@ -36,17 +41,15 @@ function CurrentWeather() {
             </div>
             <div>{weather && weather.description}</div>
          </div>
-         <h5>
-            {locations && locations.length === 1
-               ? 'Your default location is '
-               : 'Your current location is '}
-            {location && location.city && capitalize(location.city)},{' '}
-            {location && location.state.toUpperCase()}
-         </h5>
       </div>
    ) : (
       <div className='weather-container'>
-         <CircularProgress />
+         <h4> Current Weather on {date} </h4>
+         <div className='current-weather'>
+            <div>As of {currentTime} </div>
+            <h6>Invalid city name, Please try again!</h6>
+            <CircularProgress />
+         </div>
       </div>
    )
 }
