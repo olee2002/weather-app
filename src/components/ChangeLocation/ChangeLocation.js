@@ -74,7 +74,7 @@ useEffect(() => {
    return (
       <div className='location'>
          <div className='change-location'>
-            {width > 700 ? 'Add City' : ''}
+            {width > 1000 ? 'Add City' : ''}
             <TextField
                id='standard-basic'
                label='City'
