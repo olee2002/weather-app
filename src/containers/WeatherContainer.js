@@ -9,18 +9,13 @@ import Forecast from '../components/Forecast/Forecast'
 import ChangeLocation from '../components/ChangeLocation/ChangeLocation';
 
 function WeatherContainer() {
-   const [currentCity, setCurrentCity] = useState('San antonio')
-   const [currentState, setCurrentState] = useState('NY')
    return (
       <div className='container'>
          <ChangeLocation/>
 
          <div className='subcontainer'>
-         <CurrentWeather
-            currentCity={currentCity}
-            currentState={currentState}
-         />
-         <Forecast currentCity={currentCity} />
+         <CurrentWeather/>
+         <Forecast/>
          </div>
       </div>
    )

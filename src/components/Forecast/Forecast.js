@@ -6,10 +6,11 @@ import { getWeatherForecast } from '../../redux/actionCreator'
 
 import './Forecast.scss'
 
-function Forecast({ currentCity }) {
+function Forecast() {
    const dispatch = useDispatch()
+   const location = useSelector((store) => store.appReducer.location);
    useEffect(() => {
-      dispatch(getWeatherForecast(currentCity))
+      dispatch(getWeatherForecast(location.city))
    }, [])
    const data = useSelector((store) => store.appReducer.forecastData)
    const dates =
@@ -23,7 +24,7 @@ function Forecast({ currentCity }) {
                const weather = date && date.weather && date.weather[0]
                return (
                   <div key={i} className='forecast-item'>
-                     {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}
+                    <h6> {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}</h6>
                      <div>
                         <img
                            src={`http://openweathermap.org/img/wn/${

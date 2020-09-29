@@ -7,15 +7,16 @@ import { capitalize } from '../../utils';
 
 import './CurrentWeather.scss';
 
-function CurrentWeather({ currentCity, currentState }) {
+function CurrentWeather() {
    const dispatch = useDispatch()
+   const location = useSelector((store) => store.appReducer.location);
    useEffect(() => {
-      dispatch(getCurrentWeather(currentCity))
+      dispatch(getCurrentWeather(location.city))
    }, [])
    const date = moment(new Date()).format('MM/DD/YY')
    const data = useSelector((store) => store.appReducer.currentData);
-   const location = useSelector((store) => store.appReducer.location);
    const weather = data && data.weather && data.weather[0]
+   console.log('haha', weather)
    const temp =
       data && data.main && (((data.main.temp - 273.15) * 9) / 5 + 32).toFixed(0)
    const currentTime = moment(new Date()).format('hh:mm a')
@@ -35,7 +36,7 @@ function CurrentWeather({ currentCity, currentState }) {
             <div>{weather && weather.description}</div>
          </div>
          <h5>
-            Your current weather location is {location && location.city && capitalize(location.city)}, {location && location.state.toUpperCase()}
+            Your current location is {location && location.city && capitalize(location.city)}, {location && location.state.toUpperCase()}
          </h5>
       </div>
    )

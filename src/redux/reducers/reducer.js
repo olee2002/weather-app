@@ -10,7 +10,7 @@ import {
 const initialState = {
    forecastData: {},
    currentData: {},
-   locations: [],
+   locations: [{ city: 'Atlanta', state: 'GA' }],
    location: { city: 'Atlanta', state: 'GA' },
 }
 
@@ -19,7 +19,7 @@ export default function appReducer(state = initialState, action) {
    switch (action.type) {
       case ADD_LOCATION:
          state = {
-            locations: [action.payload, ...state.locations],
+            locations: [...state.locations, action.payload],
          }
          return state
       case DELETE_LOCATION:

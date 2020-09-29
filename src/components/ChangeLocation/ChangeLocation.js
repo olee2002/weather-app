@@ -8,18 +8,21 @@ import {
    getCurrentWeather,
    getWeatherForecast,
 } from '../../redux/actionCreator'
+import { capitalize } from '../../utils'
 import './ChangeLocation.scss'
 
 function ChangeLocation({ currentCity, currentState }) {
    const dispatch = useDispatch()
-   const data = useSelector((store) => store.appReducer.location)
+   const locations = useSelector((store) => store.appReducer.locations)
+   console.log('lo', locations && locations)
    const [city, setCity] = useState('')
    const [state, setState] = useState('')
    const [err, setErr] = useState('')
    const submitCityName = () => {
-         dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
-         dispatch(getCurrentWeather(city))
-         dispatch(getWeatherForecast(city))
+      dispatch({ type: 'ADD_LOCATION', payload: { city:capitalize(city), state: state.toUpperCase() }})
+      dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
+      dispatch(getCurrentWeather(city))
+      dispatch(getWeatherForecast(city))
    }
    const handleCityName = (e) => {
       setCity(e.target.value)
@@ -27,37 +30,47 @@ function ChangeLocation({ currentCity, currentState }) {
    const handleStateName = (e) => {
       setState(e.target.value)
    }
-
+   const updateCity = (location) => {
+      dispatch({ type: 'SET_LOCATION_NAME', payload: { city: location.city, state:location.state } })
+      dispatch(getCurrentWeather(location.city))
+      dispatch(getWeatherForecast(location.city))
+   }
 
    return (
-      <div className='change-location'>
-         Search {' '}
-         <TextField
-            id='standard-basic'
-            label='City'
-            margin='dense'
-            onChange={handleCityName}
-            required
-            variant='outlined'
-            style={{ width: 350, marginLeft: 10 }}
-         />
-         <TextField
-            id='standard-basic'
-            label='State'
-            margin='dense'
-            onChange={handleStateName}
-            required
-            variant='outlined'
-            style={{ width: 80, marginLeft: 10 }}
-         />
-         <Button
-            variant='contained'
-            color='primary'
-            disabled={!city || !state}
-            onClick={submitCityName}
-            style={{ marginLeft: 10 }}>
-            Submit
-         </Button>
+      <div className='location'>
+         <div className='change-location'>
+            Search{' '}
+            <TextField
+               id='standard-basic'
+               label='City'
+               margin='dense'
+               onChange={handleCityName}
+               required
+               variant='outlined'
+               style={{ width: 350, marginLeft: 10 }}
+            />
+            <TextField
+               id='standard-basic'
+               label='State'
+               margin='dense'
+               onChange={handleStateName}
+               required
+               variant='outlined'
+               style={{ width: 80, marginLeft: 5 }}
+            />
+            <Button
+               variant='contained'
+               color='primary'
+               disabled={!city || !state}
+               onClick={submitCityName}
+               style={{ marginLeft: 10 }}>
+               Add
+            </Button>
+         </div>
+         <div className='name-container'>
+            Selected Cities:
+            {locations && locations.map((location) => <div className='name-tag' onClick={()=>updateCity(location)}>{location.city}</div>)}{' '}
+         </div>
       </div>
    )
 }
