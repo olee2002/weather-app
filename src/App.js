@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getWeatherData } from './redux/actionCreator'
 
-import logo from './logo.svg'
 import './App.scss'
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
    }, [])
 
    const data = useSelector((store) => store.appReducer.location)
-   console.log('data', data)
 
    return (
       <div className='App'>
