@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: center;
       box-shadow: 5px 5px 15px #2c2c2c;
+      border-radius: 5px;
       img {
          width: 90%;
       }
@@ -28,7 +29,7 @@
    .weather-container {
       margin-right: 0px;
       .current-weather {
-         width: 90%;
+         width: 100%;
          height: 90%;
       }
    }

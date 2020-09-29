@@ -12,12 +12,20 @@ import { capitalize } from '../../utils'
 import './ChangeLocation.scss'
 
 function ChangeLocation() {
+   const innerWidth = window.innerWidth
    const dispatch = useDispatch()
    const locations = useSelector((store) => store.appReducer.locations)
    console.log('locations', locations)
    const [city, setCity] = useState('')
    const [state, setState] = useState('')
-   const [err, setErr] = useState('')
+   const [width, setWidth]   = useState(window.innerWidth);
+const updateDimensions = () => {
+    setWidth(window.innerWidth);
+}
+useEffect(() => {
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+}, []);
    const submitCityName = () => {
       dispatch({
          type: 'ADD_LOCATION',
@@ -53,7 +61,10 @@ function ChangeLocation() {
          })
          dispatch({
             type: 'SET_LOCATION_NAME',
-            payload: { city: locations && locations[0].city, state: locations && locations[0].state },
+            payload: {
+               city: locations && locations[0].city,
+               state: locations && locations[0].state,
+            },
          })
          dispatch(getCurrentWeather(locations && locations[0].city))
          dispatch(getWeatherForecast(locations && locations[0].city))
@@ -63,7 +74,7 @@ function ChangeLocation() {
    return (
       <div className='location'>
          <div className='change-location'>
-            Add City{' '}
+            {width > 700 ? 'Add City' : ''}
             <TextField
                id='standard-basic'
                label='City'
@@ -71,7 +82,7 @@ function ChangeLocation() {
                onChange={handleCityName}
                required
                variant='outlined'
-               style={{ width: 350, marginLeft: 10 }}
+               style={{ width:'45%', marginLeft: 10 }}
                value={city || ''}
             />
             <TextField
@@ -81,7 +92,7 @@ function ChangeLocation() {
                onChange={handleStateName}
                required
                variant='outlined'
-               style={{ width: 80, marginLeft: 5 }}
+               style={{ width: 70, marginLeft: 5 }}
                value={state || ''}
             />
             <Button
@@ -98,7 +109,9 @@ function ChangeLocation() {
             {locations &&
                locations.map((location) => (
                   <div className='name-tag'>
-                     <div className='city' onClick={() => updateCity(location)}>{location.city}</div>
+                     <div className='city' onClick={() => updateCity(location)}>
+                        {location.city}
+                     </div>
                      <button onClick={() => deleteCity(location)}>X</button>
                   </div>
                ))}{' '}

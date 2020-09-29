@@ -1,6 +1,9 @@
 .App {
    font-family: 'Open Sans Condensed';
-   width: 100vw;
+   top:0;
+   left:0;
+   right:0;
+   bottom:0;
  }
  
  a {
@@ -31,17 +34,18 @@
   bottom:0;
 }
 
-.App-header::before {
+.App::before {
    content : "";
    display: block;
-   position: absolute;
+   position: fixed;
    top:0;
    left:0;
    right:0;
    bottom:0;
    background-image:url('./assets/images/weather.jpg');
    background-size: cover;
-   background-repeat:no-repeat;
+   background-repeat:repeat;
+   background-attachment: fixed;
    opacity : 0.90;
    z-index: -999;
  }

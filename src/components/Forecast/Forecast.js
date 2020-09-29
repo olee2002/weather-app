@@ -24,13 +24,11 @@ function Forecast() {
                return (
                   <div key={i} className='forecast-item'>
                     <h6> {moment(date.dt_txt.split(' ')[0]).format('MM/DD/YY')}</h6>
-                     <div>
                         <img
                            src={`http://openweathermap.org/img/wn/${
                               weather && weather.icon
                            }@4x.png`}
                         />
-                     </div>
                      <h6>{weather && weather.description}</h6>
                   </div>
                )

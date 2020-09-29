@@ -1,7 +1,8 @@
 .location {
+   width: 40%;
    .change-location {
       margin-top: 20px;
-      width: 650px;
+      width: 100%;
       background: #ffffff;
       height: 70px;
       display: flex;
@@ -21,7 +22,7 @@
          flex-direction: row;
          justify-content: space-between;
          padding: 5px;
-         width: 22%;
+         width: 40%;
          height: 30px;
          background: #ffffff;
          text-align: center;
@@ -48,8 +49,14 @@
 
 @media (max-width: 700px) {
    .location {
+      width: 90%;
       .change-location {
-         width: 90%;
+         width: 100%;
+      }
+      .name-container {
+         .name-tag {
+            width: 40%;
+         }
       }
    }
 }
