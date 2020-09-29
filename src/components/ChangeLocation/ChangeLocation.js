@@ -43,7 +43,7 @@ useEffect(() => {
    const handleStateName = (e) => {
       setState(e.target.value)
    }
-   const updateCity = (e, location) => {
+   const updateCity = (location) => {
       dispatch({
          type: 'SET_LOCATION_NAME',
          payload: { city: location.city, state: location.state },
