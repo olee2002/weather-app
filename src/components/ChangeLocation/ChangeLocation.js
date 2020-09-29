@@ -11,10 +11,10 @@ import {
 import { capitalize } from '../../utils'
 import './ChangeLocation.scss'
 
-function ChangeLocation({ currentCity, currentState }) {
+function ChangeLocation() {
    const dispatch = useDispatch()
    const locations = useSelector((store) => store.appReducer.locations)
-   console.log('lo', locations && locations)
+   console.log('locations', locations)
    const [city, setCity] = useState('')
    const [state, setState] = useState('')
    const [err, setErr] = useState('')
@@ -35,7 +35,7 @@ function ChangeLocation({ currentCity, currentState }) {
    const handleStateName = (e) => {
       setState(e.target.value)
    }
-   const updateCity = (location) => {
+   const updateCity = (e, location) => {
       dispatch({
          type: 'SET_LOCATION_NAME',
          payload: { city: location.city, state: location.state },
@@ -44,14 +44,20 @@ function ChangeLocation({ currentCity, currentState }) {
       dispatch(getWeatherForecast(location.city))
    }
    const deleteCity = (location) => {
-      dispatch({
-         type: 'DELETE_LOCATION',
-         payload: location.city,
-      })
-      dispatch({
-         type: 'SET_LOCATION_NAME',
-         payload: { city: locations[0].city, state: locations[0].state },
-      })
+      if (location.city === 'Atlanta') {
+         alert("Can't delete the default location")
+      } else {
+         dispatch({
+            type: 'DELETE_LOCATION',
+            payload: location.city,
+         })
+         dispatch({
+            type: 'SET_LOCATION_NAME',
+            payload: { city: locations && locations[0].city, state: locations && locations[0].state },
+         })
+         dispatch(getCurrentWeather(locations && locations[0].city))
+         dispatch(getWeatherForecast(locations && locations[0].city))
+      }
    }
 
    return (
@@ -76,7 +82,7 @@ function ChangeLocation({ currentCity, currentState }) {
                required
                variant='outlined'
                style={{ width: 80, marginLeft: 5 }}
-               value={state||''}
+               value={state || ''}
             />
             <Button
                variant='contained'
@@ -87,15 +93,13 @@ function ChangeLocation({ currentCity, currentState }) {
                Add
             </Button>
          </div>
-            <h5>Current Selected Location(s)</h5>
+         <h5>Current Selected Location(s)</h5>
          <div className='name-container'>
             {locations &&
                locations.map((location) => (
-                  <div
-                     className='name-tag'
-                     onClick={() => updateCity(location)}>
-                     {location.city}
-                     <button onClick={()=>deleteCity(location)}>X</button>
+                  <div className='name-tag'>
+                     <div className='city' onClick={() => updateCity(location)}>{location.city}</div>
+                     <button onClick={() => deleteCity(location)}>X</button>
                   </div>
                ))}{' '}
          </div>

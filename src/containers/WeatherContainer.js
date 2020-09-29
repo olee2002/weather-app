@@ -12,7 +12,6 @@ function WeatherContainer() {
    return (
       <div className='container'>
          <ChangeLocation/>
-
          <div className='subcontainer'>
          <CurrentWeather/>
          <Forecast/>

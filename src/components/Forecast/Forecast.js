@@ -15,11 +15,10 @@ function Forecast() {
    const data = useSelector((store) => store.appReducer.forecastData)
    const dates =
       data && data.list && data.list.slice(7, 26).filter((d, i) => i % 8 === 0) // filter data to get next 3 days
-   console.log('dates', dates)
    return (
       <div className='forecast'>
          <h4> Forecast for next 3 days </h4>
-         {dates &&
+         {dates ?
             dates.map((date, i) => {
                const weather = date && date.weather && date.weather[0]
                return (
@@ -35,7 +34,7 @@ function Forecast() {
                      <h6>{weather && weather.description}</h6>
                   </div>
                )
-            })}
+            }):<div className='forecast-item'></div>}
       </div>
    )
 }
