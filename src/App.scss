@@ -1,6 +1,17 @@
 .App {
-  text-align: center;
-}
+   font-family: 'Open Sans Condensed';
+ }
+ 
+ a {
+   text-decoration: none;
+   color: black;
+ }
+
+ button,
+ a:focus {
+   outline: none !important;
+   }
+
 
 .App-logo {
   height: 40vmin;

@@ -1,4 +1,5 @@
 This project is created for a coding test and bootstrapped with Create React App.
+Current app is deployed at : https://weather-app-olee.netlify.app/
 
 ## Available Scripts
 
