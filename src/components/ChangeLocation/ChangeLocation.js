@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
-import { TextField, Button } from '@material-ui/core';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
+import { TextField, Button, Snackbar } from '@material-ui/core'
+import MuiAlert from '@material-ui/lab/Alert'
 
-import { getCurrentWeather, getWeatherForecast } from '../../redux/actionCreator';
+import {
+   getCurrentWeather,
+   getWeatherForecast,
+} from '../../redux/actionCreator'
 import './ChangeLocation.scss'
 
 function ChangeLocation({ currentCity, currentState }) {
-   const dispatch = useDispatch();
-   const data = useSelector((store) => store.appReducer.location);
-   console.log('data', data)
-   const [city, setCity] = useState('Atlanta')
-   const [state, setState] = useState('GA')
+   const dispatch = useDispatch()
+   const data = useSelector((store) => store.appReducer.location)
+   const [city, setCity] = useState('')
+   const [state, setState] = useState('')
+   const [err, setErr] = useState('')
    const submitCityName = () => {
-      dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } });
-      dispatch(getCurrentWeather(city));
-      dispatch(getWeatherForecast(city));
+         dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
+         dispatch(getCurrentWeather(city))
+         dispatch(getWeatherForecast(city))
    }
    const handleCityName = (e) => {
       setCity(e.target.value)
@@ -23,9 +27,11 @@ function ChangeLocation({ currentCity, currentState }) {
    const handleStateName = (e) => {
       setState(e.target.value)
    }
+
+
    return (
       <div className='change-location'>
-         Search different city{' '}
+         Search {' '}
          <TextField
             id='standard-basic'
             label='City'
@@ -33,20 +39,21 @@ function ChangeLocation({ currentCity, currentState }) {
             onChange={handleCityName}
             required
             variant='outlined'
-            style={{ width: 350 }}
+            style={{ width: 350, marginLeft: 10 }}
          />
-          <TextField
+         <TextField
             id='standard-basic'
             label='State'
             margin='dense'
             onChange={handleStateName}
             required
             variant='outlined'
-            style={{ width: 100 }}
+            style={{ width: 80, marginLeft: 10 }}
          />
          <Button
             variant='contained'
             color='primary'
+            disabled={!city || !state}
             onClick={submitCityName}
             style={{ marginLeft: 10 }}>
             Submit
