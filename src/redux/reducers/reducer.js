@@ -20,7 +20,9 @@ export default function appReducer(state = initialState, action) {
          return state
       case FETCH_DATA:
          state = {
-            locations: [...state.locations, ...action.data],
+            location: {
+               state, 
+               ...action.payload},
          }
          return state
       default:
