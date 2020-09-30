@@ -1,12 +1,17 @@
 This project is created for a coding test and bootstrapped with Create React App.
 Current app is deployed at : https://weather-app-olee.netlify.app/
 ![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/fullscreen.png)
-![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile01.png)
-![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile02.png)
+<p>
+<img src="https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile01.png" width="48">
+<img src="https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile02.png" width="48">
+</p>
 
 In order to run this app, you will need to create a .env file in your root directory.
 Go to https://home.openweathermap.org/ and login/register and get a free version of apikey at 
 https://home.openweathermap.org/api_keys. Pass the key below as a string.
+
+Also, in order for users to input the city name accurately, google autocomplete has been incorporated.
+And in order for the API_KEY to work, Google Places API as well as Google Maps Javascript API have to be activated.
 
 ```
 REACT_APP_WEATHER_API_KEY={YOUR API KEY}
