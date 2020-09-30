@@ -14,6 +14,7 @@ import './ChangeLocation.scss'
 function ChangeLocation() {
    const dispatch = useDispatch()
    const locations = useSelector((store) => store.appReducer.locations)
+   const storedLocation = useSelector((store) => store.appReducer.location)
    const errMsg = useSelector((store) => store.appReducer.error)
    const [city, setCity] = useState('')
    const [state, setState] = useState('')
@@ -87,36 +88,32 @@ function ChangeLocation() {
          <div className='change-location'>
             <h6>{width > 1000 ? 'Add Location ' : ''}</h6>
             <SearchLocationInput handleLocation={handleLocation} />
-
-            {width > 700 ? (
                <Button
                   variant='contained'
                   color='primary'
-                  onClick={addCityName}
-                  style={{ marginLeft: width > 700 ? 140 : 60 }}>
+                  onClick={addCityName}>
                   Add
                </Button>
-            ) : (
-               <button
-                  variant='contained'
-                  color='primary'
-                  onClick={addCityName}
-                  style={{ marginLeft: 10, height: 30, width: 30 }}>
-                  +
-               </button>
-            )}
          </div>
          <h5>
             {locations && locations.length === 1
                ? 'Default Location'
-               : 'Current Selected Location(s)'}
+               : 'Currently Selected Location(s)'}
          </h5>
          <div className='name-container'>
             {locations &&
                locations.map((location, i) => (
-                  <div className='name-tag' key={i}>
-                     <div className='city' onClick={() => updateCity(location)}>
-                        {location.city}
+                  <div 
+                  className='name-tag' 
+                  key={i}
+                  style={{ background: location.city===storedLocation.city && '#627CA2'}}
+                  >
+                     {console.log('hoha',location.city,city)}
+                     <div 
+                     className='city' 
+                     onClick={() => updateCity(location)}
+                     >
+                       <bold style={{ color: location.city===storedLocation.city && '#ffffff'}}> {location.city} </bold>
                      </div>
                      <button onClick={() => deleteCity(location)}>X</button>
                   </div>

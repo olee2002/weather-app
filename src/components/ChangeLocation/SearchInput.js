@@ -58,7 +58,6 @@ function SearchLocationInput({ handleLocation }) {
    },[query])
 
    return (
-      <div className='search-location-input'>
          <input
             ref={autoCompleteRef}
             onChange={(event) => {
@@ -67,7 +66,6 @@ function SearchLocationInput({ handleLocation }) {
             placeholder='Start typing...and select a dropdown'
             value={query}
          />
-      </div>
    )
 }
 
