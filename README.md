@@ -19,8 +19,8 @@ In order to run this app, you will need to create a .env file in your root direc
 Go to https://home.openweathermap.org/ and login/register and get a free version of apikey at 
 https://home.openweathermap.org/api_keys. Pass the key below as a string.
 
-Also, in order for users to input the city name accurately, google autocomplete has been incorporated.
-And in order for the API_KEY to work, Google Places API as well as Google Maps Javascript API have to be activated.
+Also, in order for users to input the city name field, google autocomplete has been added.
+For the API_KEY to work, Google Places API and Google Maps Javascript API both have been activated.
 
 ```
 REACT_APP_WEATHER_API_KEY={YOUR API KEY}
