@@ -105,16 +105,16 @@ function ChangeLocation() {
                      key={i}
                      style={{
                         background:
-                           location.city === storedLocation &&
-                           storedLocation.city &&
+                           location.city === (storedLocation &&
+                           storedLocation.city) &&
                            '#627CA2',
                      }}>
                      <div className='city' onClick={() => updateCity(location)}>
                         <bold
                            style={{
                               color:
-                                 location.city === storedLocation &&
-                                 storedLocation.city &&
+                                 location.city === (storedLocation &&
+                                 storedLocation.city)&&
                                  '#ffffff',
                            }}>
                            {' '}
