@@ -1,9 +1,12 @@
 This project is created for a coding test and bootstrapped with Create React App.
 Current app is deployed at : https://weather-app-olee.netlify.app/
+
+For desktop/web
 <p>
 <img src="https://github.com/olee2002/weather-app/blob/master/src/assets/images/fullscreen.png" width="600">
-
 </p>
+
+For mobile
 <p>
 <img src="https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile01.png" width="300">
 <img src="https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile02.png" width="300">
