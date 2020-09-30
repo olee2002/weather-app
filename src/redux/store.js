@@ -26,6 +26,7 @@ export default function configureStore() {
       persistedReducer,
       compose(applyMiddleware(...middleware))
    )
+
    let persistor = persistStore(store)
    return { store, persistor }
 }
