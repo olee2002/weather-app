@@ -1,6 +1,5 @@
 export const capitalize = (str) => {
-   console.log(str.includes(' '))
-   if (str.includes(' ')) {
+   if (str && str.includes(' ')) {
       return str.split(' ')
          .map((string) => {
             return string.charAt(0).toUpperCase() + string.slice(1)

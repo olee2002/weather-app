@@ -44,7 +44,6 @@ export default function appReducer(state = initialState, action) {
          }
          return state
          case FETCH_DATA_ERROR:
-            console.log('reducer error', action.payload)
          state = {
             ...state,
             error: action.payload,
