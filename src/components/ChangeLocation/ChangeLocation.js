@@ -65,7 +65,7 @@ function ChangeLocation() {
    }
    const deleteCity = (location) => {
       if (location.city === 'Atlanta') {
-         alert("Can't delete the default location. Please add a location.")
+         alert("Can't delete the default location. Please select another location.")
       } else {
          dispatch({
             type: 'DELETE_LOCATION',
