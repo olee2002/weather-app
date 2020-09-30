@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CircularProgress } from '@material-ui/core'
 import moment from 'moment'
 
+/* eslint-disable react-hooks/exhaustive-deps, jsx-a11y/alt-text*/
 import { getCurrentWeather } from '../../redux/actionCreator'
 import { capitalize } from '../../utils'
 
@@ -11,7 +12,7 @@ import './CurrentWeather.scss'
 function CurrentWeather() {
    const dispatch = useDispatch()
    const location = useSelector((store) => store.appReducer.location)
-   const locations = useSelector((store) => store.appReducer.locations)
+
    useEffect(() => {
       dispatch(getCurrentWeather(location && location.city))
    }, [])

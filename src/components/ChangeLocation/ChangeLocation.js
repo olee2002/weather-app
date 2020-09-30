@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { TextField, Button, MenuItem } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import SearchLocationInput from './SearchInput'
 
 import {
@@ -8,16 +8,12 @@ import {
    getWeatherForecast,
 } from '../../redux/actionCreator'
 import { capitalize } from '../../utils'
-import states from './stateList'
 import './ChangeLocation.scss'
 
 function ChangeLocation() {
    const dispatch = useDispatch()
    const locations = useSelector((store) => store.appReducer.locations)
    const storedLocation = useSelector((store) => store.appReducer.location)
-   const errMsg = useSelector((store) => store.appReducer.error)
-   const [city, setCity] = useState('')
-   const [state, setState] = useState('')
    const [inputValue, setInputValue] = useState('')
    const [width, setWidth] = useState(window.innerWidth)
    const updateDimensions = () => {
@@ -30,16 +26,12 @@ function ChangeLocation() {
 
    const addCityName = async () => {
       if (!inputValue.includes(',')) {
-         setCity('')
-         setState('')
          alert('Invalid city name. Please try again!')
       } else {
          const address =
             inputValue && inputValue.split(',')
          const city = address && address[0]
          const state = address && address[1]
-         setCity(city)
-         setState(state)
 
          await dispatch(getCurrentWeather(city))
          await dispatch(getWeatherForecast(city))
@@ -48,8 +40,6 @@ function ChangeLocation() {
             payload: { city: capitalize(city), state: state.toUpperCase() },
          })
          await dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
-         setCity('')
-         setState('')
       }
    }
    const handleLocation = (e) => {
@@ -110,7 +100,7 @@ function ChangeLocation() {
                            '#627CA2',
                      }}>
                      <div className='city' onClick={() => updateCity(location)}>
-                        <bold
+                        <span
                            style={{
                               color:
                                  location.city === (storedLocation &&
@@ -119,7 +109,7 @@ function ChangeLocation() {
                            }}>
                            {' '}
                            {location.city}{' '}
-                        </bold>
+                        </span>
                      </div>
                      <button onClick={() => deleteCity(location)}>X</button>
                   </div>

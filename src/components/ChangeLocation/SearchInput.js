@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps, jsx-a11y/alt-text*/
 import React, { useState, useEffect, useRef } from 'react'
 
 let autoComplete
