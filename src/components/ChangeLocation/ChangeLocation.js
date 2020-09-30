@@ -88,12 +88,9 @@ function ChangeLocation() {
          <div className='change-location'>
             <h6>{width > 1000 ? 'Add Location ' : ''}</h6>
             <SearchLocationInput handleLocation={handleLocation} />
-               <Button
-                  variant='contained'
-                  color='primary'
-                  onClick={addCityName}>
-                  Add
-               </Button>
+            <Button variant='contained' color='primary' onClick={addCityName}>
+               Add
+            </Button>
          </div>
          <h5>
             {locations && locations.length === 1
@@ -103,17 +100,26 @@ function ChangeLocation() {
          <div className='name-container'>
             {locations &&
                locations.map((location, i) => (
-                  <div 
-                  className='name-tag' 
-                  key={i}
-                  style={{ background: location.city===storedLocation.city && '#627CA2'}}
-                  >
-                     {console.log('hoha',location.city,city)}
-                     <div 
-                     className='city' 
-                     onClick={() => updateCity(location)}
-                     >
-                       <bold style={{ color: location.city===storedLocation.city && '#ffffff'}}> {location.city} </bold>
+                  <div
+                     className='name-tag'
+                     key={i}
+                     style={{
+                        background:
+                           location.city === storedLocation &&
+                           storedLocation.city &&
+                           '#627CA2',
+                     }}>
+                     <div className='city' onClick={() => updateCity(location)}>
+                        <bold
+                           style={{
+                              color:
+                                 location.city === storedLocation &&
+                                 storedLocation.city &&
+                                 '#ffffff',
+                           }}>
+                           {' '}
+                           {location.city}{' '}
+                        </bold>
                      </div>
                      <button onClick={() => deleteCity(location)}>X</button>
                   </div>
