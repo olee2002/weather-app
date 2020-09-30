@@ -13,7 +13,7 @@ function CurrentWeather() {
    const location = useSelector((store) => store.appReducer.location)
    const locations = useSelector((store) => store.appReducer.locations)
    useEffect(() => {
-      dispatch(getCurrentWeather(location.city))
+      dispatch(getCurrentWeather(location && location.city))
    }, [])
    const date = moment(new Date()).format('MM/DD/YY')
    const data = useSelector((store) => store.appReducer.currentData)
@@ -47,7 +47,7 @@ function CurrentWeather() {
          <h4> Current Weather on {date} </h4>
          <div className='current-weather'>
             <div>As of {currentTime} </div>
-            <h6>Invalid city name, Please try again!</h6>
+            <h6>Invalid city name, Please delete & try again!</h6>
             <CircularProgress />
          </div>
       </div>

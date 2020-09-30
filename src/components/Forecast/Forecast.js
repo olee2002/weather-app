@@ -10,11 +10,12 @@ function Forecast() {
    const dispatch = useDispatch()
    const location = useSelector((store) => store.appReducer.location)
    useEffect(() => {
-      dispatch(getWeatherForecast(location.city))
+      dispatch(getWeatherForecast(location && location.city))
    }, [])
    const data = useSelector((store) => store.appReducer.forecastData)
    const dates =
       data && data.list && data.list.slice(7, 26).filter((d, i) => i % 8 === 0) // filter data to get next 3 days
+
    return (
       <div className='forecast'>
          <h4> Forecast for next 3 days </h4>
@@ -22,13 +23,14 @@ function Forecast() {
             dates.map((date, i) => {
                const weather = date && date.weather && date.weather[0]
                const temp =
-      date && date.main && (((date.main.temp - 273.15) * 9) / 5 + 32).toFixed(0)
+                  date &&
+                  date.main &&
+                  (((date.main.temp - 273.15) * 9) / 5 + 32).toFixed(0)
                return (
                   <div key={i} className='forecast-item'>
                      <h6>
-                        {temp}°
-                        {' '}
-                        ({moment(date.dt_txt.split(' ')[0]).format('MM/DD')})
+                        {temp}° (
+                        {moment(date.dt_txt.split(' ')[0]).format('MM/DD')})
                      </h6>
                      <img
                         src={`http://openweathermap.org/img/wn/${

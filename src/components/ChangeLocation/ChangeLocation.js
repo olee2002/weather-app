@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { TextField, Button, MenuItem } from '@material-ui/core'
+import SearchLocationInput from './SearchInput'
 
 import {
    getCurrentWeather,
@@ -16,6 +17,7 @@ function ChangeLocation() {
    const errMsg = useSelector((store) => store.appReducer.error)
    const [city, setCity] = useState('')
    const [state, setState] = useState('')
+   const [inputValue, setInputValue] = useState('')
    const [width, setWidth] = useState(window.innerWidth)
    const updateDimensions = () => {
       setWidth(window.innerWidth)
@@ -24,14 +26,21 @@ function ChangeLocation() {
       window.addEventListener('resize', updateDimensions)
       return () => window.removeEventListener('resize', updateDimensions)
    }, [])
-   const addCityName = async () => {
-      await dispatch(getCurrentWeather(city))
 
-      if (errMsg && errMsg.includes('404')) {
+   const addCityName = async () => {
+      if (!inputValue.includes(',')) {
          setCity('')
          setState('')
          alert('Invalid city name. Please try again!')
       } else {
+         const address =
+            inputValue && inputValue.split(',').map((e) => e.replace(' ', ''))
+         const city = address && address[0]
+         const state = address && address[1]
+         setCity(city)
+         setState(state)
+
+         await dispatch(getCurrentWeather(city))
          await dispatch(getWeatherForecast(city))
          await dispatch({
             type: 'ADD_LOCATION',
@@ -42,11 +51,8 @@ function ChangeLocation() {
          setState('')
       }
    }
-   const handleCityName = (e) => {
-      setCity(e.target.value)
-   }
-   const handleStateName = (e) => {
-      setState(e.target.value)
+   const handleLocation = (e) => {
+      setInputValue(e)
    }
    const updateCity = (location) => {
       dispatch(getCurrentWeather(location.city))
@@ -79,50 +85,21 @@ function ChangeLocation() {
    return (
       <div className='location'>
          <div className='change-location'>
-            {width > 1000 ? 'Add Location' : ''}
-            <TextField
-               id='city'
-               label='City'
-               margin='dense'
-               onChange={handleCityName}
-               required
-               variant='outlined'
-               style={{ width: width === 700 ? '35%' : '45%', marginLeft: 10 }}
-               value={city || ''}
-            />
-            <TextField
-               helperText=''
-               id='state'
-               label='State'
-               margin='dense'
-               onChange={handleStateName}
-               required
-               select
-               style={{ width: 95, marginLeft: 5 }}
-               variant='outlined'
-               value={state || ''}>
-               {states.map((option) => (
-                  <MenuItem
-                     key={option.abbreviation}
-                     value={option.abbreviation}>
-                     {option.abbreviation}
-                  </MenuItem>
-               ))}
-            </TextField>
+            <h6>{width > 1000 ? 'Add Location ' : ''}</h6>
+            <SearchLocationInput handleLocation={handleLocation} />
+
             {width > 700 ? (
                <Button
                   variant='contained'
                   color='primary'
-                  disabled={!city || !state}
                   onClick={addCityName}
-                  style={{ marginLeft: 10 }}>
+                  style={{ marginLeft: width > 700 ? 140 : 60 }}>
                   Add
                </Button>
             ) : (
                <button
                   variant='contained'
                   color='primary'
-                  disabled={!city || !state}
                   onClick={addCityName}
                   style={{ marginLeft: 10, height: 30, width: 30 }}>
                   +
