@@ -1,6 +1,8 @@
 This project is created for a coding test and bootstrapped with Create React App.
 Current app is deployed at : https://weather-app-olee.netlify.app/
-
+![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/fullscreen.png)
+![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile01.png)
+![alt text](https://github.com/olee2002/weather-app/blob/master/src/assets/images/mobile02.png)
 
 In order to run this app, you will need to create a .env file in your root directory.
 Go to https://home.openweathermap.org/ and login/register and get a free version of apikey at 
