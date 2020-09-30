@@ -35,7 +35,7 @@ function ChangeLocation() {
          alert('Invalid city name. Please try again!')
       } else {
          const address =
-            inputValue && inputValue.split(',').map((e) => e.replace(' ', ''))
+            inputValue && inputValue.split(',')
          const city = address && address[0]
          const state = address && address[1]
          setCity(city)
