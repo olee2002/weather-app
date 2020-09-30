@@ -1,14 +1,16 @@
 This project is created for a coding test and bootstrapped with Create React App.
 Current app is deployed at : https://weather-app-olee.netlify.app/
 
-## Available Scripts
+
 In order to run this app, you will need to create a .env file in your root directory.
 Go to https://home.openweathermap.org/ and login/register and get a free version of apikey at 
 https://home.openweathermap.org/api_keys. Pass the key below as a string.
 
 ```
 REACT_APP_WEATHER_API_KEY={YOUR API KEY}
+REACT_APP_GOOGLE_API_KEY={YOUR API KEY}
 ```
+## Available Scripts
 In the project directory, you can run:
 
 ### `npm start`
