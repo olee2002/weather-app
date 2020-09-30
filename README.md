@@ -1,5 +1,7 @@
 This project is created for a coding test and bootstrapped with Create React App.
+
 Current app is deployed at : https://weather-app-olee.netlify.app/
+
 The technologies being used in this app are React/Hooks, Redux, Redux thunk, Redux-persist, material UI, node-sass, openweatherAPI, googlePlacesAPI etc.
 
 For desktop/web
