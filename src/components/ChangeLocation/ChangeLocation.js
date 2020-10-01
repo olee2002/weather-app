@@ -76,10 +76,9 @@ function ChangeLocation() {
    return (
       <div className='location'>
          <div className='change-location'>
-            <h6>{width > 1000 ? 'Add Location ' : ''}</h6>
             <SearchLocationInput handleLocation={handleLocation} />
-            <Button variant='contained' color='primary' onClick={addCityName}>
-               Add
+            <Button variant='contained' color='primary' onClick={addCityName} size="large" variant="text">
+               Add City
             </Button>
          </div>
          <h5>
