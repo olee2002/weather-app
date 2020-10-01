@@ -63,7 +63,7 @@ function SearchLocationInput({ handleLocation }) {
             onChange={(event) => {
                setQuery(event.target.value)
             }}
-            placeholder='Start typing...and select a dropdown'
+            placeholder='Start typing...and select a city'
             value={query}
          />
    )
