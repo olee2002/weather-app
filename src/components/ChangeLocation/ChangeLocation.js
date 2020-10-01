@@ -94,6 +94,7 @@ function ChangeLocation() {
                      className='name-tag'
                      key={i}
                      style={{
+                        border: '1px solid white',
                         background:
                            location.city === (storedLocation &&
                            storedLocation.city) &&
