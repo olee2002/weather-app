@@ -111,7 +111,7 @@ function ChangeLocation() {
                            {location.city}{' '}
                         </span>
                      </div>
-                     <button onClick={() => deleteCity(location)}>X</button>
+                    {i!==0 && <button onClick={() => deleteCity(location)}>X</button>}
                   </div>
                ))}{' '}
          </div>
