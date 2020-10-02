@@ -53,19 +53,19 @@ function SearchLocationInput({ handleLocation }) {
       )
    }, [])
 
-   useEffect(()=>{
+   useEffect(() => {
       handleLocation(query)
-   },[query])
+   }, [query])
 
    return (
-         <input
-            ref={autoCompleteRef}
-            onChange={(event) => {
-               setQuery(event.target.value)
-            }}
-            placeholder='Start typing...and select a city'
-            value={query}
-         />
+      <input
+         ref={autoCompleteRef}
+         onChange={(event) => {
+            setQuery(event.target.value)
+         }}
+         placeholder='Start typing...and select a city'
+         value={query}
+      />
    )
 }
 
