@@ -84,7 +84,7 @@ function ChangeLocation() {
          <h5>
             {locations && locations.length === 1
                ? 'Default Location'
-               : 'Currently Selected Location(s)'}
+               : 'Currently Selected Locations'}
          </h5>
          <div className='name-container'>
             {locations &&
