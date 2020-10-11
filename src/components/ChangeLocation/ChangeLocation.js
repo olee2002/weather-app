@@ -87,7 +87,7 @@ function ChangeLocation() {
                : 'Currently Selected Locations'}
          </h5>
          <div className='name-container'>
-            {locations &&
+            {locations && locations.length>0 && 
                locations.map((location, i) => (
                   <div
                      className='name-tag'
