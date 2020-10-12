@@ -42,7 +42,7 @@ async function handlePlaceSelect(updateQuery) {
    updateQuery(query)
 }
 
-function SearchLocationInput({ handleLocation }) {
+function SearchLocationInput({ handleLocation, clearInput }) {
    const [query, setQuery] = useState('')
    const autoCompleteRef = useRef(null)
 
@@ -57,14 +57,18 @@ function SearchLocationInput({ handleLocation }) {
       handleLocation(query)
    }, [query])
 
+   useEffect(() => {
+      clearInput && setQuery('')
+   },[clearInput])
+
    return (
       <input
          ref={autoCompleteRef}
          onChange={(event) => {
             setQuery(event.target.value)
          }}
-         placeholder='Start typing...and select a city'
-         value={query}
+         placeholder='Start typing...and select a city.'
+         value={query ? query : ''}
       />
    )
 }

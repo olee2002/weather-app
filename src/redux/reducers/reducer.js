@@ -13,7 +13,7 @@ const initialState = {
    currentData: {},
    locations: [{ city: 'Atlanta', state: 'GA' }],
    location: { city: 'Atlanta', state: 'GA' },
-   error: ''
+   error: '',
 }
 
 // reducer take state and action as args, depending on the action.type update the store with action.payload
@@ -43,7 +43,7 @@ export default function appReducer(state = initialState, action) {
             currentData: action.payload,
          }
          return state
-         case FETCH_DATA_ERROR:
+      case FETCH_DATA_ERROR:
          state = {
             ...state,
             error: action.payload,

@@ -15,6 +15,7 @@ function ChangeLocation() {
    const locations = useSelector((store) => store.appReducer.locations)
    const storedLocation = useSelector((store) => store.appReducer.location)
    const [inputValue, setInputValue] = useState('')
+   const [clearInput, setClearInput] = useState(false)
    const [width, setWidth] = useState(window.innerWidth)
    const updateDimensions = () => {
       setWidth(window.innerWidth)
@@ -41,10 +42,12 @@ function ChangeLocation() {
          })
          await dispatch({ type: 'SET_LOCATION_NAME', payload: { city, state } })
       }
+      setClearInput(true)
    }
    const handleLocation = (e) => {
       setInputValue(e)
    }
+
    const updateCity = (location) => {
       dispatch(getCurrentWeather(location.city))
       dispatch(getWeatherForecast(location.city))
@@ -76,7 +79,7 @@ function ChangeLocation() {
    return (
       <div className='location'>
          <div className='change-location'>
-            <SearchLocationInput handleLocation={handleLocation} />
+            <SearchLocationInput handleLocation={handleLocation} clearInput={clearInput}/>
             <Button variant='contained' color='primary' onClick={addCityName} size="large" variant="text">
                Add City
             </Button>
